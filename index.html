@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجرنا المتميز | طلب مباشر سريع</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-slate: #0f172a; /* أزرق ملكي داكن جداً خلفيات */
+            --primary-blue: #1e3a8a;  /* أزرق ملكي رئيسي */
+            --accent-orange: #f97316; /* لون برتقالي دافئ للأزرار والاستعجال */
+            --accent-orange-hover: #ea580c;
+            --text-dark: #334155;
+            --text-light: #f8fafc;
+            --bg-light: #f1f5f9;
+            --success-green: #22c55e;
+            --error-red: #ef4444;
+            --border-color: #cbd5e1;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Tajawal', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            line-height: 1.7; 
+            overflow-x: hidden;
+        }
+
+        .container { 
+            width: 92%; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+        }
+        /* الهيدر */
+        header { 
+            padding: 15px 0; 
+            background: #ffffff; 
+            position: sticky; 
+            top: 0; 
+            z-index: 999; 
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); 
+        }
+        header .header-flex {
+            display: table;
+            width: 100%;
+        }
+        header .logo { 
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 24px; 
+            font-weight: 800; 
+            color: var(--primary-blue);
+        }
+        header .logo i { margin-left: 8px; color: var(--accent-orange); }
+
+        /* شريط الميزات السريع */
+        .features-bar { 
+            background: var(--primary-slate); 
+            color: var(--text-light); 
+            padding: 12px 0; 
+            font-size: 13px; 
+            text-align: center; 
+            font-weight: 500;
+        }
+        .features-bar .feat-item { 
+            display: inline-block; 
+            margin: 0 15px; 
+        }
+        .features-bar .feat-item i { color: var(--accent-orange); margin-left: 6px; }
+
+        /* قسم الهيرو المحسن */
+        .hero { 
+            padding: 60px 0; 
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%); 
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .hero-row {
+            display: table;
+            width: 100%;
+        }
+        .hero-col {
+            display: table-cell;
+            width: 50%;
+            vertical-align: middle;
+            padding: 0 20px;
+        }
+        .hero h1 { 
+            font-size: 34px; 
+            font-weight: 800;
+            color: var(--primary-slate);
+            line-height: 1.3;
+            margin-bottom: 20px; 
+        }
+        .hero h1 span { color: var(--primary-blue); }
+        .hero p { 
+            font-size: 17px; 
+            color: #475569; 
+            margin-bottom: 30px; 
+        }
+        .hero-badges { margin-bottom: 20px; }
+        .hero-badge { display: inline-block; background: #dbeafe; color: var(--primary-blue); padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 700; margin-left: 8px; margin-bottom: 8px;}
+        
+        /* مكان مخصص ومحمي لصورة المنتج */
+        .product-image-container {
+            text-align: center;
+            position: relative;
+        }
+        .product-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+            border: 4px solid #ffffff;
+            transition: var(--transition-smooth);
+        }
+        .product-image-container img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* قسم طلب الاستمارة */
+        .order-section { padding: 60px 0; }
+        .order-form-container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 40px 30px; 
+            border-radius: 24px; 
+            background-color: #ffffff; 
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06); 
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .form-title { 
+            text-align: center; 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: var(--primary-slate); 
+            margin-bottom: 30px; 
+            position: relative;
+        }
+        .form-title span { color: var(--accent-orange); }
+
+        /* تحسينات الحقول */
+        .form-group { margin-bottom: 22px; position: relative; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 700; 
+            font-size: 14px; 
+            color: var(--primary-slate);
+        }
+        .input-wrapper { position: relative; }
+        .input-wrapper i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 16px;
+            transition: var(--transition-smooth);
+        }
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 14px 45px 14px 40px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            font-size: 15px; 
+            background-color: #f8fafc; 
+            color: var(--primary-slate);
+            transition: var(--transition-smooth);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .form-group input:focus, .form-group select:focus { 
+            border-color: var(--primary-blue); 
+            background-color: #fff; 
+            box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+        }
+        .form-group input:focus + i, .form-group select:focus + i {
+            color: var(--primary-blue);
+        }
+
+        /* أيقونة التحقق من المدخلات الفورية */
+        .validation-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            display: none;
+        }
+        .valid .validation-icon { display: block; color: var(--success-green); }
+        .valid input { border-color: var(--success-green); background-color: rgba(34, 197, 94, 0.02); }
+
+        /* الفاتورة الرقمية الأنيقة لحساب السعر */
+        .price-calculator { 
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); 
+            padding: 25px; 
+            border-radius: 16px; 
+            margin: 30px 0; 
+            border: 1px solid #e2e8f0; 
+        }
+        .calc-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 14px; 
+            font-size: 15px; 
+            color: #475569;
+        }
+        .calc-row strong { color: var(--primary-slate); }
+
+        /* التحكم بالكمية */
+        .quantity-control { 
+            display: flex; 
+            align-items: center; 
+            border: 1px solid var(--border-color); 
+            border-radius: 50px; 
+            overflow: hidden; 
+            background: #fff; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .btn-qty { 
+            background: #f1f5f9; 
+            border: none; 
+            width: 40px; 
+            height: 40px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            color: var(--primary-slate);
+            transition: var(--transition-smooth);
+        }
+        .btn-qty:hover { background: #e2e8f0; }
+        .qty-value { width: 45px; text-align: center; font-weight: 700; font-size: 16px; color: var(--primary-slate); }
+        
+        /* السطر الإجمالي للفاتورة */
+        .total-row { 
+            border-top: 2px dashed #cbd5e1; 
+            padding-top: 18px; 
+            margin-top: 18px; 
+            font-size: 19px; 
+            font-weight: 800; 
+            color: var(--primary-blue); 
+        }
+        .total-row span:last-child {
+            color: var(--accent-orange);
+            font-size: 22px;
+        }
+
+        /* زر الإرسال مع الأنيميشن والـ Spinner */
+        .btn-submit-order { 
+            display: block; 
+            width: 100%; 
+            background-color: var(--accent-orange); 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            font-size: 18px; 
+            font-weight: 700; 
+            border-radius: 14px; 
+            cursor: pointer; 
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3); 
+            transition: var(--transition-smooth); 
+            text-align: center; 
+            position: relative;
+        }
+        .btn-submit-order:hover { 
+            background-color: var(--accent-orange-hover);
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4); 
+        }
+        .btn-submit-order:active { transform: translateY(0); }
+        .btn-submit-order:disabled { background-color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* الـ Spinner المخصص للتحميل */
+        .spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* نافذة النجاح المنبثقة الناعمة Fade-in Pop-up */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .success-popup {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: #ffffff;
+            width: 90%; max-width: 500px;
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .popup-overlay.show { display: block; opacity: 1; }
+        .popup-overlay.show .success-popup { transform: translate(-50%, -50%) scale(1); }
+        
+        /* أيقونة النجاح المتحركة */
+        .success-checkmark {
+            width: 70px; height: 70px;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success-green);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; margin: 0 auto 20px auto;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .success-popup h3 { font-size: 24px; color: var(--primary-slate); margin-bottom: 12px; font-weight: 800; }
+        .success-popup p { color: #64748b; font-size: 15px; margin-bottom: 25px; }
+        .btn-close-popup { background: var(--primary-blue); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: var(--transition-smooth); }
+        .btn-close-popup:hover { background: var(--primary-slate); }
+
+        /* الفوتر */
+        footer { background: var(--primary-slate); color: var(--text-light); text-align: center; padding: 25px 0; font-size: 14px; font-weight: 500; }
+
+        /* التجاوب والتوافق التام مع الهواتف الذكية (Mobile-First Design) */
+        @media (max-width: 768px) {
+            .hero-col { display: block; width: 100%; padding: 0; }
+            .hero-col:first-child { margin-bottom: 35px; text-align: center; }
+            .hero h1 { font-size: 26px; }
+            .product-image-container img { max-width: 85%; }
+            .order-form-container { padding: 30px 15px; border-radius: 16px; }
+            .testimonials-grid { display: block; }
+            .testimonial-card { display: block; width: 100%; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-flex">
+                <div class="logo"><i class="fa-solid fa-basket-shopping"></i> كولشي</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="features-bar">
+        <div class="container">
+            <div class="feat-item"><i class="fa-solid fa-truck-ramp-box"></i> الدفع عند الاستلام (COD)</div>
+            <div class="feat-item"><i class="fa-solid fa-bolt"></i> توصيل سريع وآمن</div>
+            <div class="feat-item"><i class="fa-solid fa-rotate-left"></i> ضمان الاستبدال والاسترجاع</div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-row">
+                <div class="hero-col">
+                    <div class="hero-badges">
+                        <span class="hero-badge"><i class="fa-solid fa-star"></i> الأعلى مبيعاً</span>
+                        <span class="hero-badge"><i class="fa-solid fa-shield-halved"></i> جودة مضمونة</span>
+                    </div>
+                    <h1>اطلب الآن مباشرة في أقل من <span>30 ثانية!</span></h1>
+                    <p>يرجى ملء استمارة الطلب أدناه بعناية وسرعة، وسيقوم فريق المبيعات والخدمة بالاتصال بك هاتفياً لتأكيد العنوان وشحن المنتج فوراً.</p>
+                </div>
+                <div class="hero-col">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60" alt="صورة المنتج الاحترافية">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="order-section" id="order-form">
+        <div class="container">
+            <div class="order-form-container">
+                <div class="form-title">📋 <span>املأ معلوماتك</span> لتأكيد الطلب الفوري</div>
+                
+                <form id="purchaseForm">
+                    
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user-tag"></i> الاسم الكامل:</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="fullName" placeholder="أدخل اسمك الكامل" required>
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="phoneGroup">
+                        <label><i class="fa-solid fa-phone-volume"></i> رقم الهاتف:</label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="phoneNumber" placeholder=" " required>
+                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-solid fa-circle-check validation-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-map-location-dot"></i> الولاية:</label>
+                        <div class="input-wrapper">
+                            <select id="wilaya" required>
+                                <option value="" disabled selected>اختر ولايتك من القائمة</option>
+                                <option value="01-أدرار">01 - أدرار</option>
+                                <option value="02-الشلف">02 - الشلف</option>
+                                <option value="03-الأغواط">03 - الأغواط</option>
+                                <option value="04-أم البواقي">04 - أم البواقي</option>
+                                <option value="05-باتنة">05 - باتنة</option>
+                                <option value="06-بجاية">06 - بجاية</option>
+                                <option value="07-بسكرة">07 - بسكرة</option>
+                                <option value="08-بشار">08 - بشار</option>
+                                <option value="09-البليدة">09 - البليدة</option>
+                                <option value="10-البويرة">10 - البويرة</option>
+                                <option value="11-تمنراست">11 - تمنراست</option>
+                                <option value="12-تبسة">12 - تبسة</option>
+                                <option value="13-تلمسان">13 - تلمسان</option>
+                                <option value="14-تيارت">14 - تيارت</option>
+                                <option value="15-تيزي وزو">15 - تيزي وزو</option>
+                                <option value="16-الجزائر العاصمة">16 - الجزائر العاصمة</option>
+                                <option value="17-الجلفة">17 - الجلفة</option>
+                                <option value="18-جيجل">18 - جيجل</option>
+                                <option value="19-سطيف">19 - سطيف</option>
+                                <option value="20-سعيدة">20 - سعيدة</option>
+                                <option value="21-سكيكدة">21 - سكيكدة</option>
+                                <option value="22-سيدي بلعباس">22 - سيدي بلعباس</option>
+                                <option value="23-عنابة">23 - عنابة</option>
+                                <option value="24-قالمة">24 - قالمة</option>
+                                <option value="25-قسنطينة">25 - قسنطينة</option>
+                                <option value="26-المدية">26 - المدية</option>
+                                <option value="27-مستغانم">27 - مستغانم</option>
+                                <option value="28-المسيلة">28 - المسيلة</option>
+                                <option value="29-معسكر">29 - معسكر</option>
+                                <option value="30-ورقلة">30 - ورقلة</option>
+                                <option value="31-وهران">31 - وهران</option>
+                                <option value="32-البيض">32 - البيض</option>
+                                <option value="33-إيليزي">33 - إيليزي</option>
+                                <option value="34-برج بوعريريج">34 - برج بوعريريج</option>
+                                <option value="35-بومرداس">35 - بومرداس</option>
+                                <option value="36-الطارف">36 - الطارف</option>
+                                <option value="37-تندوف">37 - تندوف</option>
+                                <option value="38-تسمسيلت">38 - تسمسيلت</option>
+                                <option value="39-الوادي">39 - الوادي</option>
+                                <option value="40-خنشلة">40 - خنشلة</option>
+                                <option value="41-سوق أهراس">41 - سوق أهراس</option>
+                                <option value="42-تيبازة">42 - تيبازة</option>
+                                <option value="43-ميلة">43 - ميلة</option>
+                                <option value="44-عين الدفلى">44 - عين الدفلى</option>
+                                <option value="45-النعامة">45 - النعامة</option>
+                                <option value="46-عين تموشنت">46 - عين تموشنت</option>
+                                <option value="47-غرداية">47 - غرداية</option>
+                                <option value="48-غليزان">48 - غليزان</option>
+                                <option value="49-تيميمون">49 - تيميمون</option>
+                                <option value="50-برج باجي مختار">50 - برج باجي مختار</option>
+                                <option value="51-أولاد جلال">51 - أولاد جلال</option>
+                                <option value="52-بني عباس">52 - بني عباس</option>
+                                <option value="53-عين صالح">53 - عين صالح</option>
+                                <option value="54-عين قزام">54 - عين قزام</option>
+                                <option value="55-تقرت">55 - تقرت</option>
+                                <option value="56-جانت">56 - جانت</option>
+                                <option value="57-المغير">57 - المغير</option>
+                                <option value="58-المنيعة">58 - المنيعة</option>
+                            </select>
+                            <i class="fa-solid fa-map-pin"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-house-chimney-window"></i> العنوان الكامل والمفصل:</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="fullAddress" placeholder="البلدية، الحي، أو اسم الشارع ورقم الدار" required>
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                    </div>
+
+                    <div class="price-calculator">
+                        <div class="calc-row">
+                            <span><strong>سعر المنتج الأساسي:</strong></span>
+                            <span>4500 د.ج</span>
+                        </div>
+                        <div class="calc-row">
+                            <span><strong>سعر توصيل كود الشحن:</strong></span>
+                            <span>600 د.ج</span>
+                        </div>
+                        <div class="calc-row">
+                            <span><strong>الكمية المطلوبة:</strong></span>
+                            <div class="quantity-control">
+                                <button type="button" class="btn-qty" onclick="changeQuantity(-1)"><i class="fa-solid fa-minus"></i></button>
+                                <span class="qty-value" id="quantityVal">1</span>
+                                <button type="button" class="btn-qty" onclick="changeQuantity(1)"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="calc-row total-row">
+                            <span><i class="fa-solid fa-receipt"></i> الفاتورة الكلية:</span>
+                            <span id="totalPriceText">5100 د.ج</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn-submit-order">
+                        <span id="btnText"><i class="fa-solid fa-basket-shopping"></i> تأكيد الطلب الفوري المباشر</span>
+                        <div class="spinner" id="btnSpinner"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="success-popup">
+            <div class="success-checkmark">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3>🎉 تم استلام طلبك بنجاح باهر!</h3>
+            <p>شكرًا جزيلاً لثقتك بمتجرنا. يقوم الآن موظفو المبيعات والدعم بمراجعة وتجهيز طلبيتك، وسيتم التواصل معك عبر رقم هاتفك خلال الساعات القليلة القادمة لتأكيد الشحن الفوري.</p>
+            <button class="btn-close-popup" onclick="closePopup()">حسناً، فهمت</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 جميع الحقوق محفوظة ومحمية لمتجرنا الإلكتروني.</p>
+    </footer>
+
+    <script>
+        // الرابط الخاص بجوجل شيت (يرجى وضعه بدلاً من النص أدناه عند الحصول عليه)
+        const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL"; 
+
+        const PRODUCT_PRICE = 4500; 
+        const DELIVERY_PRICE = 600; 
+        let currentQuantity = 1;
+
+        // تحديث وعرض الفاتورة الفورية
+        function updatePrice() {
+            const total = (PRODUCT_PRICE * currentQuantity) + DELIVERY_PRICE;
+            document.getElementById('quantityVal').innerText = currentQuantity;
+            document.getElementById('totalPriceText').innerText = total + " د.ج";
+        }
+
+        function changeQuantity(amount) {
+            currentQuantity += amount;
+            if (currentQuantity < 1) currentQuantity = 1;
+            updatePrice();
+        }
+
+        // نظام التحقق الفوري الذكي من صحة رقم الهاتف الجزائري
+        const phoneInput = document.getElementById('phoneNumber');
+        const phoneGroup = document.getElementById('phoneGroup');
+
+        phoneInput.addEventListener('input', function() {
+            const val = phoneInput.value.trim();
+            // الكود يتحقق من أن الإدخال يبدأ بـ 05 أو 06 أو 07 ومكون من 10 أرقام تماماً
+            const regex = /^(05|06|07)[0-9]{8}$/;
+
+            if(regex.test(val)) {
+                phoneGroup.classList.add('valid');
+            } else {
+                phoneGroup.classList.remove('valid');
+            }
+        });
+
+        // معالجة إرسال الفورم الخلفي عبر Fetch API
+        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            
+            // تفعيل الـ Spinner وتعطيل النقر لمنع تكرار الإرسال
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'block';
+            submitBtn.disabled = true;
+
+            const totalCost = (PRODUCT_PRICE * currentQuantity) + DELIVERY_PRICE;
+
+            // بناء تجميعة البيانات المتوافقة مع الشيت
+            const formData = new FormData();
+            formData.append("fullName", document.getElementById('fullName').value);
+            formData.append("phoneNumber", document.getElementById('phoneNumber').value);
+            formData.append("wilaya", document.getElementById('wilaya').value);
+            formData.append("fullAddress", document.getElementById('fullAddress').value);
+            formData.append("quantity", currentQuantity);
+            formData.append("totalPrice", totalCost + " د.ج");
+
+            // إرسال البيانات المجمعة إلى تطبيق ويب جوجل
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // إظهار النافذة المنبثقة الذكية للنجاح مع إعادة ضبط الهيكل والنموذج
+                document.getElementById('purchaseForm').reset();
+                phoneGroup.classList.remove('valid');
+                currentQuantity = 1;
+                updatePrice();
+                
+                // إعادة الزر لوضعه الطبيعي
+                btnText.style.display = 'block';
+                btnSpinner.style.display = 'none';
+                submitBtn.disabled = false;
+
+                // تفعيل ظهور المنبثقة التفاعلية
+                const overlay = document.getElementById('popupOverlay');
+                overlay.classList.add('show');
+            })
+            .catch(error => {
+                alert("للأسف، حدث خطأ غير متوقع أثناء إرسال بيانات طلبك، يرجى إعادة المحاولة مجدداً.");
+                btnText.style.display = 'block';
+                btnSpinner.style.display = 'none';
+                submitBtn.disabled = false;
+                console.error('Error!', error.message);
+            });
+        });
+
+        // دالة إغلاق النافذة المنبثقة التفاعلية
+        function closePopup() {
+            const overlay = document.getElementById('popupOverlay');
+            overlay.classList.remove('show');
+        }
+    </script>
+</body>
+</html>
